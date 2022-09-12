@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const contactController = require('./controllers/contact.controller');
 
 const app = express();
 
@@ -11,5 +12,18 @@ app.get('/', (req, res) => {
         message: 'Welcome to the Contact Book App!!'
     });
 })
+
+app.route("/api/contacts")
+    .get(contactController.findALl)
+    .post(contactController.create)
+    .delete(contactController.deleteAll);
+        
+app.route('/api/contacts/favorite').get(contactController.findAllFavorite)
+
+app.route('/api/contacts/:id')
+    .get(contactController.findOne)
+    .put(contactController.update)
+    .delete(contactController.delete);
+
 
 module.exports = app
