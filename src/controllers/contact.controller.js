@@ -51,6 +51,9 @@ exports.findOne = async (req, res, next) => {
         if (!contact) {
             return next(new ApiError(404, 'Contact not found'))
         }
+
+        return res.send(contact);
+        
     } catch(err) {
         console.log(err);
         return next(
